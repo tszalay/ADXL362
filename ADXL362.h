@@ -10,7 +10,9 @@
  Created June 2012
  by Anne Mahaffey - hosted on http://annem.github.com/ADXL362
  
- */ 
+ Minor modifications by Tamas Szalay (tszalay on GitHub)
+ 
+*/ 
 
 #include "Arduino.h"
 
@@ -32,7 +34,7 @@ public:
 	int readXData();
 	int readYData();
 	int readZData();
-	void readXYZTData(int XData, int YData, int ZData, int Temperature);
+	void readXYZTData(int& XData, int& YData, int& ZData, int& Temperature);
 	int readTemp();
 	
 	//

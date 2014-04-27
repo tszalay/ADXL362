@@ -10,6 +10,8 @@
  Created June 2012
  by Anne Mahaffey - hosted on http://annem.github.com/ADXL362
  
+ Minor modifications by Tamas Szalay (tszalay on GitHub)
+ 
  */ 
 
 #include <Arduino.h>
@@ -17,7 +19,7 @@
 #include <SPI.h>
 
 const int slaveSelectPin = 10;
-const bool debugSerial = 1;
+const bool debugSerial = 0;
 
 ADXL362::ADXL362() {
 
@@ -38,7 +40,7 @@ void ADXL362::begin() {
   SPIwriteOneRegister(0x1F, 0x52);  // Write to SOFT RESET, "R"
   delay(10);
   Serial.println("Soft Reset\n");
- }
+}
 
  
 //
@@ -86,7 +88,8 @@ int ADXL362::readTemp(){
   if (debugSerial) {Serial.print("\tTEMP = "); Serial.print(TEMP); }
 }
 
-void ADXL362::readXYZTData(int XData, int YData, int ZData, int Temperature){
+// tszalay - changed to be by reference, to have proper output variables
+void ADXL362::readXYZTData(int& XData, int& YData, int& ZData, int& Temperature){
   
   // burst SPI read
   // A burst read of all three axis is required to guarantee all measurements correspond to same sample time
@@ -109,7 +112,6 @@ void ADXL362::readXYZTData(int XData, int YData, int ZData, int Temperature){
 	Serial.print(  "\tZDATA = "); Serial.print(ZData); 
 	Serial.print(  "\tTemperature = "); Serial.println(Temperature);
 	}
-
 }
 
 
